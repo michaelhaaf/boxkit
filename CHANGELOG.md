@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 (2024-01-28)
+
+
+### Bug Fixes
+
+* remove xq (not in alpine:edge) ([dbe545b](https://github.com/michaelhaaf/ublue-cli/commit/dbe545bee9ce255af85645223c8c2dab5d4c3122))
+* update cosign keys ([50a5d98](https://github.com/michaelhaaf/ublue-cli/commit/50a5d984637c42985f9f22ff185724bbf4ad512b))
+
 ## [1.1.0](https://github.com/ublue-os/boxkit/compare/v1.0.0...v1.1.0) (2023-10-09)
 
 
