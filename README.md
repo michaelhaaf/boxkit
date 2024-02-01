@@ -8,7 +8,7 @@ It can be used on any Linux distributon by following the usage section below.
 
 ### Command line
 
-`distrobox-create --image ghcr.io/michaelhaaf/ublue-cli --name cli -Y`
+`distrobox-create --image ghcr.io/michaelhaaf/boxkit --name cli -Y`
 
 ### Distrobox assemble
 
@@ -25,4 +25,4 @@ exported_bins_path="~/.local/bin"
 
 These images are signed with sisgstore's cosign. You can verify the signature by downloading the cosign.pub key from this repo and running the following command:
 
-`cosign verify --key cosign.pub ghcr.io/michaelhaaf/ublue-cli`
+`cosign verify --key cosign.pub ghcr.io/michaelhaaf/boxkit`
