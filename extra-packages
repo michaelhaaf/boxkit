@@ -29,6 +29,7 @@ gnupg
 gpg
 helix
 hyperfine
+imagemagick
 iproute2
 iputils
 jq
@@ -48,6 +49,7 @@ libxt
 make
 man-pages
 mandoc
+moreutils
 micro
 mount
 ncdu
