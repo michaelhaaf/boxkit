@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/michaelhaaf/boxkits/compare/v1.0.0...v1.0.1) (2024-03-31)
+
+
+### Bug Fixes
+
+* wrong source image registry ([173871c](https://github.com/michaelhaaf/boxkits/commit/173871c86bed945ab7e6be1afdfecf9b3771fd88))
+
 ## 1.0.0 (2024-01-28)
 
 
