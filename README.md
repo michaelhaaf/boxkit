@@ -9,6 +9,7 @@ Each "boxkit" facilitates publishing a custom OCI, designed for ublue/bluebuild 
 ## Images maintained
 
 - `cli`: my further-opinionated adaptation of `bluefin-cli`
+- `cli-dx`: my further-opinionated adaptation of `bluefin-cli-dx`
 - More to come...
 
 ## Creation
