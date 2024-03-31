@@ -1,28 +1,51 @@
-# ublue-cli
+# michaelhaaf's boxkits
 
-ublue-cli is an Alpine Linux based OCI forked from [ublue-os/boxkit](). 
+Each "boxkit" facilitates publishing a custom OCI, designed for ublue/bluebuild operating systems. Adapted from the [ublue-os/boxkit](https://github.com/ublue-os/boxkit) template.
 
-It can be used on any Linux distributon by following the usage section below.
+## Dependencies
+
+`podman` and `distrobox`.
+
+## Images maintained
+
+- `cli`: my further-opinionated adaptation of `bluefin-cli`
+- More to come...
 
 ## Creation
 
+These images are signed with sisgstore's cosign. You can verify the signature by downloading the cosign.pub key from this repo and running the following command:
+
+`cosign verify --key cosign.pub ghcr.io/michaelhaaf/<image-name>`
+
+The examples below pertain to the `cli` image though the other images in this repository would use the same commands.
+
 ### Command line
 
-`distrobox-create --image ghcr.io/michaelhaaf/boxkit --name cli -Y`
+`distrobox-create --image ghcr.io/michaelhaaf/cli --name cli -Y`
 
 ### Distrobox assemble
 
+You can initalize the OCI image with default exported apps using `distrobox-assemble`, for e.g.:
+
 ```
 [cli]
-image=ghcr.io/michaelhaaf/ublue-cli:latest 
+image=ghcr.io/michaelhaaf/cli:latest
 pull=true
 replace=true
-init_hooks=uname -n > /etc/hostname
 exported_apps="nvim"
 exported_bins="/usr/bin/nvim /usr/bin/pass /usr/bin/tessen"
 exported_bins_path="~/.local/bin"
 ```
 
-These images are signed with sisgstore's cosign. You can verify the signature by downloading the cosign.pub key from this repo and running the following command:
+### Distrobox quadlets
 
-`cosign verify --key cosign.pub ghcr.io/michaelhaaf/boxkit`
+TODO: not tested yet, may change.
+
+Let systemd manage the OCI images so they start up when you log in (otherwise, the distrobox needs to re-install base packages/etc. and that takes time.)
+
+See https://github.com/michaelhaaf/toolboxes. I think you can do something like this:
+
+- adapt and copy `./quadlets/containername/*` to `~/.config/containers/systemd/`
+  - systemd picks this stuff up by default (?)
+  - Since these are `~/.config/` files, I'm going to manage them with `chezmoi`.
+- enable `podman-auto-update.timer` (?)

@@ -1,19 +1,17 @@
-name: build-boxkit
+name: build-and-push-cli
 on:
-  pull_request:
-    branches:
-      - main
   schedule:
-    - cron: '0 0 * * TUE'
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**/README.md'
+    - cron: '0 4 * * *'  # 4am every day
+  pull_request:
+  merge_group:
+  workflow_dispatch:
 env:
-    IMAGE_NAME: boxkit
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   push-ghcr:
@@ -25,20 +23,35 @@ jobs:
       id-token: write
     strategy:
       fail-fast: false
-    steps: 
+      matrix:
+        image_name: ["cli", "cli-dx"]
+    steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
         uses: actions/checkout@v4
-        
+
+      - name: Determine base image
+        run: |
+          if [[ "${{ matrix.image_name }}" == "cli" ]]; then
+            echo "SOURCE_IMAGE_NAME=wolfi-toolbox" >> $GITHUB_ENV
+          elif [[ "${{ matrix.image_name }}" == "cli-dx" ]]; then
+            echo "SOURCE_IMAGE_NAME=wolfi-dx-toolbox" >> $GITHUB_ENV
+          fi
+
+      - name: Verify base image
+        uses: EyeCantCU/cosign-action/verify@v0.2.2
+        with:
+          containers: ${{ env.SOURCE_IMAGE_NAME }}
+
       # Build metadata
       - name: Image Metadata
         uses: docker/metadata-action@v5
         id: meta
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
+            ${{ matrix.image_name }}
           labels: |
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/ublue-os/boxkit/main/README.md
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/michaelhaaf/boxkits/main/README.md
 
       # Build image using Buildah action
       - name: Build Image
@@ -46,12 +59,15 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./Containerfile
-          image: ${{ env.IMAGE_NAME }}
+            ./boxkits/cli/Containerfile
+          image: ${{ matrix.image_name }}
           tags: ${{ env.IMAGE_TAGS }}
+          build-args: |
+            SOURCE_IMAGE_NAME=${{ env.SOURCE_IMAGE_NAME }}
+            SOURCE_IMAGE_REGISTRY=${{ env.IMAGE_REGISTRY }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
-          
+
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
       - name: Lowercase Registry
@@ -75,21 +91,25 @@ jobs:
           password: ${{ env.REGISTRY_PASSWORD }}
           extra-args: |
             --disable-content-trust
-            
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
+        if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-            
+
       # Sign container
       - uses: sigstore/cosign-installer@v3.4.0
+        if: github.event_name != 'pull_request'
 
       - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ steps.registry_case.outputs.lowercase }}/${{ env.IMAGE_NAME }}@${TAGS}
+          echo "${{ env.COSIGN_PRIVATE_KEY }}" > cosign.key
+          wc -c cosign.key
+          cosign sign -y --key cosign.key ${{ steps.registry_case.outputs.lowercase }}/${{ matrix.image_name }}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
