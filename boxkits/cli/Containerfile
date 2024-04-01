@@ -37,4 +37,5 @@ RUN \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-copy && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-paste && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wtype && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/fuzzel && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl
