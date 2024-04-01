@@ -28,3 +28,13 @@ RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-pre
     mkdir -p /usr/share/ && \
     cp /tmp/bash-prexec /usr/share/bash-prexec && \
     rm -rf /tmp/*
+
+# TODO: modularize like the above bash-preexecs
+# Link other host utilities
+RUN \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass-otp && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-copy && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-paste && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wtype && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl

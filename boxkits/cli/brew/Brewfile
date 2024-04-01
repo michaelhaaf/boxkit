@@ -1,0 +1,6 @@
+tap "homebrew/bundle"
+brew "python@3.12"
+brew "corepack"
+brew "neovim"
+brew "nvm"
+brew "rustup-init"
