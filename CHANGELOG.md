@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/michaelhaaf/boxkits/compare/v1.0.1...v1.1.0) (2024-04-10)
+
+
+### Features
+
+* add quadlets ([e73a9bf](https://github.com/michaelhaaf/boxkits/commit/e73a9bf55e20378be9a6ede97b0689f1d2a3cb7e))
+* begin customizations (packages, Brewfile, host imports) ([b5b3a5f](https://github.com/michaelhaaf/boxkits/commit/b5b3a5fc076d388b988b9894fec0ff11eb844275))
+
 ## [1.0.1](https://github.com/michaelhaaf/boxkits/compare/v1.0.0...v1.0.1) (2024-03-31)
 
 
