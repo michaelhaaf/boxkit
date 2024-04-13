@@ -42,6 +42,10 @@ exported_bins_path="~/.local/bin"
 
 TODO: not tested yet, may change.
 
+UPDATE: the following documentation is helpful:
+- https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html
+- https://www.redhat.com/sysadmin/podman-run-pods-systemd-services
+
 Let systemd manage the OCI images so they start up when you log in (otherwise, the distrobox needs to re-install base packages/etc. and that takes time.)
 
 See https://github.com/michaelhaaf/toolboxes. I think you can do something like this:
