@@ -15,6 +15,7 @@ zsh
 gzip
 chezmoi
 zellij
+less
 delta
 scdoc
 btop
