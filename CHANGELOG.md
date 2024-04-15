@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/michaelhaaf/boxkits/compare/v1.1.0...v1.1.1) (2024-04-15)
+
+
+### Bug Fixes
+
+* remove duplicate less dependency, remove deprecated release-please config ([21b8fb2](https://github.com/michaelhaaf/boxkits/commit/21b8fb2902164063ce46f1af26ad3e32870fc715))
+
 ## [1.1.0](https://github.com/michaelhaaf/boxkits/compare/v1.0.1...v1.1.0) (2024-04-10)
 
 
