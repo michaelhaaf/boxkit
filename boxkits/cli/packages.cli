@@ -23,3 +23,5 @@ lazygit
 fontconfig
 gettext
 less
+imagemagick
+nmap
