@@ -25,3 +25,4 @@ gettext
 less
 imagemagick
 nmap
+cmake
