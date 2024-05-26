@@ -19,18 +19,15 @@ RUN apk update && \
     mv /home/linuxbrew /home/homebrew && \
     rm /toolbox-packages
 
-# Patch /usr/bin/entrypoint
-RUN sed -i '/missing_packages=0/,/# Set SHELL to the install path inside the container/ s/^/#/' /usr/bin/entrypoint && \
-    sed -i '/# Set SHELL to the install path inside the container/a touch /.containersetupdone' /usr/bin/entrypoint
+# Configure Locales and get bash-prexec
+RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o /tmp/bash-prexec \
+    && mkdir -p /usr/share/ \
+    && cp /tmp/bash-prexec /usr/share/bash-prexec \
+    && printf 'LANG=en_US.utf8\nexport LANG\n' > /etc/profile.d/locale.sh \
+    && printf 'LANG=en_US.utf8\nexport LANG\nSTARSHIP_CONFIG=/etc/starship.toml\nexport STARSHIP_CONFIG\neval "$(atuin init zsh)"\neval "$(zoxide init zsh --cmd cd)"\neval "$(starship init zsh)"' >> /etc/zsh/zshrc \
+    && printf 'LANG="en_US.UTF-8"' > /etc/locale.conf \
+    && rm -rf /tmp/*
 
-# Use and configure bash, retrieve bash-prexec
-RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o /tmp/bash-prexec && \
-    mkdir -p /usr/share/ && \
-    cp /tmp/bash-prexec /usr/share/bash-prexec && \
-    rm -rf /tmp/*
-
-# TODO: modularize like the above bash-preexecs
-# Link other host utilities
 RUN \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass-otp && \
