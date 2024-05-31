@@ -5,9 +5,9 @@ ARG SOURCE_IMAGE="${SOURCE_IMAGE_REGISTRY}/${SOURCE_IMAGE_NAME}"
 FROM $SOURCE_IMAGE:latest
 
 LABEL com.github.containers.toolbox="true" \
-      usage="This image is meant to be used with the Toolbox or Distrobox commands" \
-      summary="A terminal experience powered by Wolfi and Homebrew, adapted from ublue-os/toolboxes" \
-      maintainer="michael.haaf@gmail.com"
+    usage="This image is meant to be used with the Toolbox or Distrobox commands" \
+    summary="A terminal experience powered by Wolfi and Homebrew, adapted from ublue-os/toolboxes" \
+    maintainer="michael.haaf@gmail.com"
 
 COPY ./boxkits/cli/packages.cli /toolbox-packages
 COPY ./boxkits/cli/files /
@@ -31,9 +31,11 @@ RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-pre
 RUN \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/pass-otp && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/gpg && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/gpg-agent && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-copy && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-paste && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wtype && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/fuzzel && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/tailscale && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl && \
