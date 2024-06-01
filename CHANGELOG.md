@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/michaelhaaf/boxkits/compare/v1.1.1...v1.1.2) (2024-06-01)
+
+
+### Bug Fixes
+
+* traililng backslash ([84029bf](https://github.com/michaelhaaf/boxkits/commit/84029bfc35f665e7fcbf9e45b1a631ef23c4132d))
+* trailing && ([acbcac5](https://github.com/michaelhaaf/boxkits/commit/acbcac51e6b86e923e9371e2ab056ebdd1a94c30))
+
 ## [1.1.1](https://github.com/michaelhaaf/boxkits/compare/v1.1.0...v1.1.1) (2024-04-15)
 
 
