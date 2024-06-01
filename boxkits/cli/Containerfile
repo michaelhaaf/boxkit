@@ -38,4 +38,4 @@ RUN \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wtype && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/fuzzel && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/tailscale && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/journalctl &&
