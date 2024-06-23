@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/michaelhaaf/boxkits/compare/v1.1.2...v1.1.3) (2024-06-23)
+
+
+### Bug Fixes
+
+* bluefin brew and sudo issues ([d6159e7](https://github.com/michaelhaaf/boxkits/commit/d6159e7c546d24fb2607cc3f24b4eeefcfdcd0f8))
+
 ## [1.1.2](https://github.com/michaelhaaf/boxkits/compare/v1.1.1...v1.1.2) (2024-06-01)
 
 
