@@ -46,10 +46,6 @@ if [ -z "$BASHRCSOURCED" ]; then
     # fi
     # to your custom modification shell script in /etc/profile.d/ directory
   fi
-  STARSHIP_CONFIG=/etc/starship.toml
-  export STARSHIP_CONFIG
-
-  [[ -x $(command -v starship) ]] && eval "$(starship init bash)"
 
   # Enable fzf keybindings
   [ -r /run/host/usr/share/fzf/shell/key-bindings.bash ] && \
