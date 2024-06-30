@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/michaelhaaf/boxkits/compare/v1.1.3...v1.1.4) (2024-06-30)
+
+
+### Bug Fixes
+
+* update Containerfile to reflect simplifications from previous ([8f2756b](https://github.com/michaelhaaf/boxkits/commit/8f2756b1a772d30cbdf1a1af42cdb953117f93ff))
+
 ## [1.1.3](https://github.com/michaelhaaf/boxkits/compare/v1.1.2...v1.1.3) (2024-06-23)
 
 
